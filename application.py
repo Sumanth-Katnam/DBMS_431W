@@ -1,9 +1,9 @@
 from flask import Flask
 
-from pyFiles.login.login import login_blueprints
+from pyFiles.routes.routes import routes_blueprints
 
 application = app = Flask(__name__)
-app.register_blueprint(login_blueprints)
+app.register_blueprint(routes_blueprints)
 
 app.secret_key = "I am Batman"
 

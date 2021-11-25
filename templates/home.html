@@ -1,0 +1,15 @@
+{% extends "mainPage.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    Welcome {{session['userName']}}
+</div>
+
+<script>
+    $('#mainNavBar #home').addClass('active');
+</script>
+
+{% endblock %}
