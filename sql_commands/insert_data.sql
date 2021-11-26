@@ -1,9 +1,10 @@
 -- Students Table load
---LOAD DATA LOCAL INFILE '/home/mmb7103/DBMS_431W/data/ref_students.csv'
--- INTO TABLE ref_students
--- FIELDS TERMINATED BY ','
--- LINES TERMINATED BY '\r\n'
--- (fld1,fld2,fld3,fld4);
+LOAD DATA LOCAL INFILE '/home/mmb7103/DBMS_431W/data/students.csv'
+ INTO TABLE ref_students
+ FIELDS TERMINATED BY ','
+ LINES TERMINATED BY '\r\n'
+   IGNORE 1 LINES
+ (fname,mname,lname,email_id);
 
 --SET FOREIGN_KEY_CHECKS=0;
 --SET FOREIGN_KEY_CHECKS=1;
