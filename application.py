@@ -8,4 +8,4 @@ app.register_blueprint(routes_blueprints)
 app.secret_key = "I am Batman"
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host = '0.0.0.0', port = 80)
