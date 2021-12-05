@@ -139,3 +139,4 @@ cython_debug/
 
 
 token.txt
+.DS_Store
