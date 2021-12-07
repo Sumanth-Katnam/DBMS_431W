@@ -139,3 +139,4 @@ cython_debug/
 
 .vscode
 token.txt
+.DS_Store
