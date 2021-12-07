@@ -58,7 +58,7 @@
                             <td>3</td> 
                             <td>Cloud computing</td> 
                             <td>Leslie Thompkins</td> 
-                            <td>Mon, Wed, Fri</td> 
+                            <td>Tue, Thu</td> 
                             <td>3:05 PM - 4:20 PM</td> 
                             <td>Room 16</td> 
                             <td>Conflicting</td>
