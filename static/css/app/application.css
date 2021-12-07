@@ -15,3 +15,17 @@ h3 {
 #mainNavBar .active {
   text-decoration: underline;
 }
+
+ul li {
+  font-size: 25px;
+}
+
+.col-md-3:has(label) {
+  font-weight: bold;
+  text-align: right !important;
+}
+
+label {
+  font-weight: bold;
+  float: right;
+}
