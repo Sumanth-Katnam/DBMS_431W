@@ -17,7 +17,7 @@ desc ref_students;
 -- Instructors Table
 drop table ref_instructors;
 CREATE TABLE ref_instructors(
-	instructor_id int(11) NOT NULL,
+	instructor_id int(11) NOT NULL AUTO_INCREMENT,
 	fname varchar(100) NOT NULL,
 	mname varchar(100) NOT NULL,
 	lname varchar(100) NOT NULL,
@@ -30,7 +30,7 @@ desc ref_instructors;
 --department table
 drop table ref_department;
 CREATE TABLE ref_department(
-	dept_id int(11) NOT NULL,
+	dept_id int(11) NOT NULL AUTO_INCREMENT,
 	dept_name varchar(30) NOT NULL,
 	PRIMARY KEY (dept_id)
 );
@@ -40,7 +40,7 @@ desc ref_department;
 -- Courses Table
 drop table ref_courses;
 CREATE TABLE ref_courses(
-	course_id int(11) NOT NULL,
+	course_id int(11) NOT NULL AUTO_INCREMENT,
 	course_name varchar(100) NOT NULL,
 	dept_id int(11) NOT NULL,
 	PRIMARY KEY (course_id),
@@ -51,7 +51,7 @@ desc ref_courses;
 -- Room Table
 drop table ref_room;
 CREATE TABLE ref_room(
-	room_id int(11) NOT NULL,
+	room_id int(11) NOT NULL AUTO_INCREMENT,
 	room_name varchar(30) NOT NULL,
 	capacity int(3) NOT NULL,
 	PRIMARY KEY (room_id)
@@ -61,7 +61,7 @@ desc ref_room;
 -- Schedules Table
 drop table ref_schedules;
 CREATE TABLE ref_schedules(
-    schedule_id int(11) NOT NULL,
+    schedule_id int(11) NOT NULL AUTO_INCREMENT,
     occurrence varchar(5) NOT NULL,
     start_time varchar(10) NOT NULL,
     end_time varchar(10) NOT NULL,
@@ -97,6 +97,9 @@ CREATE TABLE courses_cart_entry(
 );
 desc courses_cart_entry;
 
+
+
+
 -- Courses Taken
 drop table courses_taken;
 CREATE TABLE courses_taken(
@@ -108,6 +111,7 @@ CREATE TABLE courses_taken(
     FOREIGN KEY (offering_id) REFERENCES course_offerings(offering_id)
 );
 desc courses_taken;
+
 
 
 
