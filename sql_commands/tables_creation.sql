@@ -62,7 +62,7 @@ desc ref_room;
 drop table ref_schedules;
 CREATE TABLE ref_schedules(
     schedule_id int(11) NOT NULL AUTO_INCREMENT,
-    occurrence varchar(5) NOT NULL,
+    occurrence varchar(50) NOT NULL,
     start_time varchar(10) NOT NULL,
     end_time varchar(10) NOT NULL,
     PRIMARY KEY (schedule_id)
