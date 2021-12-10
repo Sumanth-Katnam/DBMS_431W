@@ -5,8 +5,6 @@ LOAD DATA LOCAL INFILE '/home/mmb7103/DBMS_431W/data_new/students.csv'
  LINES TERMINATED BY '\r\n'
  (fname,mname,lname,email_id,password,last_logged_in,country_code,phone_number);
 
---SET FOREIGN_KEY_CHECKS=0;
---SET FOREIGN_KEY_CHECKS=1;
 -- Instructors Table load
 LOAD DATA LOCAL INFILE '/home/mmb7103/DBMS_431W/data_new/instructors.csv'
  INTO TABLE ref_instructors
@@ -42,12 +40,12 @@ LOAD DATA LOCAL INFILE '/home/mmb7103/DBMS_431W/data_new/schedules.csv'
  LINES TERMINATED BY '\r\n'
  (occurrence,start_time,end_time);
 
-   --course_offerings table
-   LOAD DATA LOCAL INFILE '/home/mmb7103/DBMS_431W/data_new/course_offerings.csv'
-    INTO TABLE course_offerings
-    FIELDS TERMINATED BY ','
-    LINES TERMINATED BY '\n'
-    (course_uuid,instructor_id,room_id,schedule_id);
+--course_offerings table
+LOAD DATA LOCAL INFILE '/home/mmb7103/DBMS_431W/data_new/course_offerings.csv'
+ INTO TABLE course_offerings
+ FIELDS TERMINATED BY ','
+ LINES TERMINATED BY '\n'
+ (course_uuid,instructor_id,room_id,schedule_id);
 
 -- courses_cart Table load
 LOAD DATA LOCAL INFILE '/home/mmb7103/DBMS_431W/data_new/courses_cart.csv'
@@ -89,11 +87,31 @@ LOAD DATA LOCAL INFILE '/home/mmb7103/DBMS_431W/data_new/courses_taken.csv'
 
 
  Insert into course_offerings
- select NULL,d.courses_id, b.instructor_id, c.room_uuid, c.schedule_uuid
- from course_offerings_tmp a, teachings b, sections c, ref_courses d
- where a.course_uuid = d.courses_id
- and b.section_uuid = c.uuid
- and a.uuid = c.course_offering_uuid;
+ select NULL,d.course_id, b.instructor_id, c.room_id, c.schedule_id
+
+
+select * from (select *,row_number() over(partition by schedule_id,room_id order by schedule_id,room_id) as rn
+from abc) a where a.rn =1 limit 10;
+
+select * from (SELECT
+   *,
+   ROW_NUMBER() OVER (
+      PARTITION BY schedule_id
+      ORDER BY schedule_id
+   ) row_num
+FROM
+   abc) a where a.row_num=1;
+
+SELECT
+  ROW_NUMBER() OVER(ORDER BY schedule_id ASC) AS Row,
+  schedule_id, room_id
+FROM abc limit 10;
+
+ create table abc as
+ select c.course_id, i.instructor_id, r.room_id, s.schedule_id
+ from  ref_room r, ref_schedules s, ref_courses c, ref_instructors i;
+
+
 
  -- ref_term Table load
  LOAD DATA LOCAL INFILE '/home/mmb7103/DBMS_431W/data_new/ref_term.csv'
@@ -101,3 +119,5 @@ LOAD DATA LOCAL INFILE '/home/mmb7103/DBMS_431W/data_new/courses_taken.csv'
   FIELDS TERMINATED BY ','
   LINES TERMINATED BY '\r\n'
   (fld1,fld2,fld3,fld4);
+
+-----
