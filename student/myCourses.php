@@ -40,7 +40,7 @@
                         <td>Mon, Wed, Fri</td> 
                         <td>9:05 AM - 9:55 AM</td> 
                         <td>Room 32</td> 
-                        <td><button class="btn btn-warning">Drop class</button></td>
+                        <td><button class="btn btn-warning dropClassBtn">Drop class</button></td>
                     </tr>
                     <tr>
                         <td>2</td> 
@@ -49,7 +49,7 @@
                         <td>Tue, Thu</td> 
                         <td>3:05 PM - 4:20 PM</td> 
                         <td>Room 41</td> 
-                        <td><button class="btn btn-warning">Drop class</button></td>
+                        <td><button class="btn btn-warning dropClassBtn">Drop class</button></td>
                     </tr>
                     <tr>
                         <td>3</td> 
@@ -58,14 +58,14 @@
                         <td>Mon, Wed, Fri</td> 
                         <td>4:35 PM - 5:50 PM</td> 
                         <td>Room 16</td> 
-                        <td><button class="btn btn-warning">Drop class</button></td>
+                        <td><button class="btn btn-warning dropClassBtn">Drop class</button></td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div class="col-md-2"></div>
     </div>
-    
+    <script src="../static/js/app/student/myCourses.js"></script>
     <script>
         $('#mainNavBar #myCourses').addClass('active');
     </script>
