@@ -45,7 +45,7 @@ LOAD DATA LOCAL INFILE '/home/mmb7103/DBMS_431W/data_new/course_offerings.csv'
  INTO TABLE course_offerings
  FIELDS TERMINATED BY ','
  LINES TERMINATED BY '\n'
- (course_uuid,instructor_id,room_id,schedule_id);
+ (room_id,schedule_id,course_id,instructor_id);
 
 -- courses_cart Table load
 LOAD DATA LOCAL INFILE '/home/mmb7103/DBMS_431W/data_new/courses_cart.csv'
@@ -111,7 +111,12 @@ FROM abc limit 10;
  select c.course_id, i.instructor_id, r.room_id, s.schedule_id
  from  ref_room r, ref_schedules s, ref_courses c, ref_instructors i;
 
-
+SELECT *
+FROM abc
+INTO OUTFILE '/var/www/flask_app/data/temp.csv'
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n';
 
  -- ref_term Table load
  LOAD DATA LOCAL INFILE '/home/mmb7103/DBMS_431W/data_new/ref_term.csv'
