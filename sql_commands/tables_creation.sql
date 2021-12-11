@@ -62,7 +62,7 @@ desc ref_room;
 drop table ref_schedules;
 CREATE TABLE ref_schedules(
     schedule_id int(11) NOT NULL AUTO_INCREMENT,
-    occurrence varchar(50) NOT NULL,
+    occurrence varchar(30) NOT NULL,
     start_time varchar(10) NOT NULL,
     end_time varchar(10) NOT NULL,
     PRIMARY KEY (schedule_id)
@@ -82,7 +82,7 @@ CREATE TABLE course_offerings(
     FOREIGN KEY (instructor_id) REFERENCES ref_instructors(instructor_id),
     FOREIGN KEY (room_id) REFERENCES ref_room(room_id),
     FOREIGN KEY (schedule_id) REFERENCES ref_schedules(schedule_id)
-    );
+);
 desc course_offerings;
 
 -- Courses Cart
@@ -117,6 +117,8 @@ desc courses_taken;
 
 -----tables not being used
 
+
+-- OLDER TABLES -- DO NOT USE ---
 
 CREATE TABLE sections(
 	uuid varchar(100) NOT NULL,

@@ -33,3 +33,7 @@ form input {
   align-items: center;
   justify-content: right;
 }
+
+label {
+  float: left;
+}

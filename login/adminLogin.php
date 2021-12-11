@@ -1,7 +1,8 @@
 <?php
-// require '../commons/config.php';
+require '../commons/config.php';
 
 session_start();
+
 if(isset($_POST['signin'])) {
   login();
 }
@@ -12,19 +13,19 @@ function login() {
   $username = $_POST["user"];
   $password = $_POST["pwd"];
 
-//   $query = "SELECT * FROM user_registration WHERE username='$username' AND password='$password' LIMIT 1";
-//   $result = mysqli_query($con, $query);
-//   $count = mysqli_num_rows($result);
-    $count = 1;
+  $query = "SELECT * FROM ref_instructors WHERE email_id='$username' AND password='$password' LIMIT 1";
+  $result = mysqli_query($con, $query);
+  $count = mysqli_num_rows($result);
 
   if ($count == 1) {
-    // $logged_in_user = mysqli_fetch_assoc($result);
+    $logged_in_user = mysqli_fetch_assoc($result);
 
-    // $_SESSION['user'] = $logged_in_user;
-    $_SESSION['success']  = "You are now logged in";
-    $_SESSION['fname']  = "Bruce";
-    $_SESSION['lname']  = "Wayne";
-    $_SESSION['is_admin']  = "Yes";
+    $_SESSION['emailId'] = $logged_in_user['email_id'];
+    $_SESSION['user_id'] = $logged_in_user['instructor_id'];
+    $_SESSION['fname']  = $logged_in_user['fname'];
+    $_SESSION['mname']  = $logged_in_user['mname'];
+    $_SESSION['lname']  = $logged_in_user['lname'];
+    $_SESSION['is_admin']  = true;
     header("location:../admin/adminHome.php");
 
   } else if ($count == 0) {
