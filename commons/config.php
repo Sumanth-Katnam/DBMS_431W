@@ -7,7 +7,7 @@
   ini_set('display_startup_errors', 1);
   error_reporting(E_ALL);
 
-  $db = "users";
+  $db = "431w_project";
   $servername = "localhost";
   $mysql_username = "root";
   $mysql_password = "";

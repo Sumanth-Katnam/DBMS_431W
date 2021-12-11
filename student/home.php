@@ -7,7 +7,7 @@
 <?php startblock('content') ?>
    <div class="container">
       <h2>
-         Welcome, <?php echo $_SESSION["fname"].' '.$_SESSION["lname"] ?>
+         Welcome, <?php echo $_SESSION["fname"].' '.$_SESSION["mname"].' '.$_SESSION["lname"] ?>
       </h2>
       <br>
       <ul>
@@ -19,7 +19,7 @@
       <br>
 
       <div style="float: right;">
-         <b>You were last logged-in on 3rd Dec, 2021.</b>
+         <b>You were last logged-in on <?php echo $_SESSION["last_logged_in"] ?>.</b>
       </div>
       
    </div>

@@ -7,7 +7,7 @@
 <?php startblock('content') ?>
    <div class="container">
       <h2>
-         Welcome, <?php echo $_SESSION["fname"].' '.$_SESSION["lname"] ?>
+         Welcome, <?php echo $_SESSION["fname"].' '.$_SESSION["mname"].' '.$_SESSION["lname"] ?>
       </h2>
       <br>
       <b>Go through the links on the menu bar for different reports.</b>

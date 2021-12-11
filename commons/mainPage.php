@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php require_once '../static/php/ti/ti.php' ?>
 
 <!DOCTYPE html>
@@ -16,6 +17,7 @@
     <script src="../static/js/jquery-3.6.0.min.js"></script>
     <script src="../static/js/bootstrap.min.js"></script>
     <script src="../static/js/app/application.js"></script>
+    <script src="../static/js/app/common.js"></script>
     <script src="../static/datatables/datatables.min.js"></script>
     <script src="../static/datatables/Buttons-2.0.1/js/dataTables.buttons.min.js"></script>
     <script src="../static/datatables/pdfmake-0.1.36/pdfmake.min.js"></script>
@@ -35,13 +37,10 @@
     </title>
 </head>
 
-
-<?php session_start(); ?>
-
 <body>
     <?php startblock('menu') ?>
         <?php
-            if ($_SESSION['is_admin'] == "No") {
+            if (!$_SESSION['is_admin']) {
               include '../commons/studentMenuBar.php';
             } else {
                 include '../commons/adminMenuBar.php';
