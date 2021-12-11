@@ -10,11 +10,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="../static/css/bootstrap.min.css" media="screen">
+    <link rel="stylesheet" href="../static/css/jquery-ui.css" media="screen">
     <link rel="stylesheet" href="../static/css/app/application.css" media="screen">
     <link rel="stylesheet" href="../static/datatables/datatables.min.css" media="screen" />
     <link rel="stylesheet" href="../static/datatables/Buttons-2.0.1/css/buttons.dataTables.min.css" media="screen" />
 
     <script src="../static/js/jquery-3.6.0.min.js"></script>
+    <script src="../static/js/jquery-ui.min.js"></script>
     <script src="../static/js/bootstrap.min.js"></script>
     <script src="../static/js/app/application.js"></script>
     <script src="../static/js/app/common.js"></script>

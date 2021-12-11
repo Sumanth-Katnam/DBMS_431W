@@ -9,6 +9,10 @@
 //   return cleaned;
 // }
 
+const addOption = ($dropdown, value, text) => {
+  $dropdown.append($('<option>').val(value).text(text));
+};
+
 function formatPhoneNumber(value) {
   // if input value is falsy eg if the user deletes the input, then just return
   if (!value) return value;
@@ -36,3 +40,60 @@ function formatPhoneNumber(value) {
     6
   )}-${phoneNumber.slice(6, 10)}`;
 }
+
+const ConfirmDialog = (title, message) => {
+  let defer = $.Deferred();
+  $('<div></div>')
+    .appendTo('body')
+    .html('<div><h6>' + message + '?</h6></div>')
+    .dialog({
+      modal: true,
+      title: title,
+      zIndex: 10000,
+      autoOpen: true,
+      width: 'auto',
+      resizable: false,
+      buttons: {
+        Yes: function () {
+          defer.resolve(true);
+
+          $(this).dialog('close');
+        },
+        No: function () {
+          defer.resolve(false);
+
+          $(this).dialog('close');
+        },
+      },
+      close: function (event, ui) {
+        $(this).remove();
+      },
+    });
+  return defer.promise();
+};
+
+const alertDialog = (title, message) => {
+  let defer = $.Deferred();
+  $('<div></div>')
+    .appendTo('body')
+    .html('<div><h6>' + message + '?</h6></div>')
+    .dialog({
+      modal: true,
+      title: title,
+      zIndex: 10000,
+      autoOpen: true,
+      width: 'auto',
+      resizable: false,
+      buttons: {
+        Ok: function () {
+          defer.resolve(true);
+
+          $(this).dialog('close');
+        },
+      },
+      close: function (event, ui) {
+        $(this).remove();
+      },
+    });
+  return defer.promise();
+};

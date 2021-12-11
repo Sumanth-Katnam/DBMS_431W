@@ -6,6 +6,16 @@
 
 <?php startblock('content') ?>
     <div class="container">
+        <div class="row" id="messageRow" style="display: none;">
+            <div class="col-md-12">
+                <div class="alert fade show" role="alert" id="alertBox">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong id="message"></strong>
+                </div>
+            </div>
+        </div>
+        <br>
+
         <div class="row" id="infoRow">
             <div class="col-md-12">
                 <div class="alert alert-primary alert-dismissible fade show" role="alert" id="alertBox">
@@ -18,7 +28,7 @@
         </div>
     </div>
    
-    <div class="row">
+    <div class="row" id="streamDrpdwnDiv">
         <div class="col-md-3">
             <label for="stream">Stream:</label>
         </div>
@@ -34,7 +44,7 @@
         <div class="col-md-2"></div>
     </div>
     <br>
-    <div class="row">
+    <div class="row" id="courseDrpdwnDiv">
         <div class="col-md-3">
             <label for="courseName">Course Name:</label>
         </div>
@@ -50,7 +60,7 @@
         <div class="col-md-2"></div>
     </div>
     <br><br>
-    <div id="offeringsDiv">
+    <div id="offeringsDiv" style="display: none;">
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8"><h3>Course Offerings:</h3></div>
@@ -116,6 +126,7 @@
         </div>
     </div>
 
+    <script src="../static/js/app/student/selectCourses.js"></script>
     <script>
         $('#mainNavBar #selectCourses').addClass('active');
     </script>

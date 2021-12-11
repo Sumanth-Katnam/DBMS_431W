@@ -42,7 +42,7 @@
                             <td>9:05 AM - 9:55 AM</td> 
                             <td>Room 32</td> 
                             <td>Good</td> 
-                            <td><button class="btn btn-warning"><i class="fas fa-trash"></i> Remove</button></td>
+                            <td><button class="btn btn-warning removeClassBtn"><i class="fas fa-trash"></i> Remove</button></td>
                         </tr>
                         <tr>
                             <td>2</td> 
@@ -52,7 +52,7 @@
                             <td>3:05 PM - 4:20 PM</td> 
                             <td>Room 41</td> 
                             <td>Conflicting</td>
-                            <td><button class="btn btn-warning"><i class="fas fa-trash"></i> Remove</button></td>
+                            <td><button class="btn btn-warning removeClassBtn"><i class="fas fa-trash"></i> Remove</button></td>
                         </tr>
                         <tr>
                             <td>3</td> 
@@ -62,7 +62,7 @@
                             <td>3:05 PM - 4:20 PM</td> 
                             <td>Room 16</td> 
                             <td>Conflicting</td>
-                            <td><button class="btn btn-warning"><i class="fas fa-trash"></i> Remove</button></td>
+                            <td><button class="btn btn-warning removeClassBtn"><i class="fas fa-trash"></i> Remove</button></td>
                         </tr>
                         <tr>
                             <td>4</td> 
@@ -72,7 +72,7 @@
                             <td>3:05 PM - 4:20 PM</td> 
                             <td>Room 16</td> 
                             <td>Class Full</td>
-                            <td><button class="btn btn-warning"><i class="fas fa-trash"></i> Remove</button></td>
+                            <td><button class="btn btn-warning removeClassBtn"><i class="fas fa-trash"></i> Remove</button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -83,12 +83,13 @@
         <div class="row">
             <div class="col-md-8"></div>
             <div class="col-md-2" style="text-align: right;">
-                <button class="btn btn-primary">Finish Enrollment</button>
+                <button class="btn btn-primary" id="finishEnrollBtn">Finish Enrollment</button>
             </div>
             <div class="col-md-2"></div>
         </div>
     </div>
 
+    <script src="../static/js/app/student/cart.js"></script>
     <script>
         $('#mainNavBar #cart').addClass('active');
     </script>
