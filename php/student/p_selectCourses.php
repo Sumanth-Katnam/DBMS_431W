@@ -65,13 +65,28 @@
                 ON CO.schedule_id = S.schedule_id
                 WHERE CO.course_id = '$course_id'";
 
+         $select_query = "SELECT CO.offering_id, CONCAT(I.fname, ' ', I.mname, ' ', I.lname) AS instructor_name, S.occurrence, S.start_time, S.end_time, (a2.capacity-a1.filled) as availability
+                        FROM ( SELECT count(*) AS filled
+                                FROM course_offerings
+                                WHERE course_id = '$course_id') a1,
+                        (SELECT r.capacity
+                            FROM ref_room r, course_offerings c
+                            WHERE r.room_id = c.room_id
+                            and c.course_id = '$course_id') a2,
+                        course_offerings CO
+                        JOIN ref_instructors I
+                        ON CO.instructor_id = I.instructor_id
+                        JOIN ref_schedules S
+                        ON CO.schedule_id = S.schedule_id
+                        WHERE CO.course_id = '$course_id'";
+
         if(!$courseOfferings = mysqli_query($con, $select_query)) {
             echo "Failed to retrieve course offerings";
         } else {
             $offeringsArr = [];
             while($offering = mysqli_fetch_assoc($courseOfferings)){
                 $offeringObj = new CourseOffering($offering['offering_id'], $offering['instructor_name'], 
-                    $offering['occurrence'], $offering['start_time'], $offering['end_time'], '');
+                    $offering['occurrence'], $offering['start_time'], $offering['end_time'], $offering['availability']);
                 array_push($offeringsArr, $offeringObj);
             }
             echo json_encode($offeringsArr);
