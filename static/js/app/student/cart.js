@@ -27,7 +27,7 @@ const populateCartEntries = (entries) => {
         .append($('<td>').text(entry.occurrence))
         .append($('<td>').text(entry.schedule_time))
         .append($('<td>').text(entry.room_name))
-        .append($('<td>').attr('class', 'statusCol').text('entry.status'))
+        .append($('<td>').attr('class', 'statusCol').text(entry.status))
         .append(
           $('<td>').append(
             $('<button>')
@@ -62,12 +62,6 @@ const checkEmpty = () => {
 };
 
 const dropCartCourse = (entryId) => {
-  const _removeRow = (entryId) => {
-    $tableBody = $('#cartEntriesTable').find('tbody');
-    $tableBody.find('tr#entry_' + entryId).remove();
-    checkEmpty();
-  };
-
   request = $.ajax({
     url: '../php/student/p_cart.php',
     type: 'POST',
@@ -84,6 +78,7 @@ const dropCartCourse = (entryId) => {
 };
 
 const displayMessage = (action, isSuccess) => {
+  isSuccess = isSuccess ? 'success' : 'error';
   const _messages = {
     dropCart: {
       success: {
@@ -150,8 +145,7 @@ const finishEnrollHandler = () => {
   const question = 'Are you sure you enroll into these courses?';
   ConfirmDialog('Warning', question).then(function (response) {
     if (response) {
-      // finishEnrollment();
-      console.log('good');
+      finishEnrollment();
     }
   });
 };
@@ -170,7 +164,7 @@ $(document).ready(function () {
       .find('tbody')
       .find('.statusCol')
       .filter(function () {
-        return $(this).text() == 'entry.status';
+        return $(this).text().indexOf('Seats') > 0;
       }).length;
 
     totalRowCount = $tableBody = $('#cartEntriesTable')
