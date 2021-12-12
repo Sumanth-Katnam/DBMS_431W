@@ -7,10 +7,10 @@
   ini_set('display_startup_errors', 1);
   error_reporting(E_ALL);
 
-  $db = "431w_project";
+  $db = "mmb7103_431W_project";
   $servername = "localhost";
-  $mysql_username = "root";
-  $mysql_password = "";
+  $mysql_username = "mmb7103";
+  $mysql_password = "CMPSC431W";
 
   try {
     $con = mysqli_connect($servername, $mysql_username, $mysql_password);
