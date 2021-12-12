@@ -78,7 +78,6 @@ const dropCartCourse = (entryId) => {
 };
 
 const displayMessage = (action, isSuccess) => {
-  isSuccess = isSuccess ? 'success' : 'error';
   const _messages = {
     dropCart: {
       success: {
@@ -131,8 +130,8 @@ const finishEnrollment = () => {
     type: 'POST',
     datatype: 'json',
     data: { func: 'finishEnrollment' },
-    success: function (cartEntries) {
-      populateCartEntries(JSON.parse(cartEntries));
+    success: function (isSuccess) {
+      location.reload();
     },
     error: function (XMLHttpRequest, textStatus, errorThrown) {
       console.log('Status: ' + textStatus);

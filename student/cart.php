@@ -63,10 +63,10 @@
     <script src="../static/js/app/student/cart.js"></script>
     <?php 
         if(isset($_SESSION['dropCartStatus'])){
-            echo "<script> displayMessage('dropCart', ".$_SESSION['dropCartStatus'].")</script>";
+            echo "<script> displayMessage('dropCart', '".$_SESSION['dropCartStatus']."')</script>";
             unset($_SESSION['dropCartStatus']);
         } elseif(isset($_SESSION['enrollmentStatus'])){
-            echo "<script> displayMessage('enrollment', ".$_SESSION['enrollmentStatus'].")</script>";
+            echo "<script> displayMessage('enrollment', '".$_SESSION['enrollmentStatus']."')</script>";
             unset($_SESSION['enrollmentStatus']);
         }
     ?>
