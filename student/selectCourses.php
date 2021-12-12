@@ -28,34 +28,25 @@
         </div>
     </div>
    
+    <?php 
+        require '../php/student/p_selectCourses.php';
+    ?>
     <div class="row" id="streamDrpdwnDiv">
         <div class="col-md-3">
             <label for="stream">Stream:</label>
         </div>
         <div class="col-md-7">
-            <select name="streamDrpdwn" id="streamDrpdwn" class="form-control">
-                <option value="-1">-- Please select a Stream --</option>
-                <option value="1">Computer Science</option>
-                <option value="2">Computer Engineering</option>
-                <option value="3">Electrical Engineering</option>
-                <option value="4">Agriculture Engineering</option>
-            </select>
+            <select name="streamDrpdwn" id="streamDrpdwn" class="form-control" required></select>
         </div>
         <div class="col-md-2"></div>
     </div>
     <br>
-    <div class="row" id="courseDrpdwnDiv">
+    <div class="row" id="courseDrpdwnDiv" style="display: none;">
         <div class="col-md-3">
             <label for="courseName">Course Name:</label>
         </div>
         <div class="col-md-7">
-            <select name="courseNameDrpdwn" id="courseNameDrpdwn" class="form-control">
-                <option value="-1">-- Please select a Course --</option>
-                <option value="1">Database Management System</option>
-                <option value="2">Operating System</option>
-                <option value="3">Comp security</option>
-                <option value="4">Cloud computing</option>
-            </select>
+            <select name="courseNameDrpdwn" id="courseNameDrpdwn" class="form-control" required></select>
         </div>
         <div class="col-md-2"></div>
     </div>
@@ -70,7 +61,8 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-7">
-                <table class="table table-striped table-bordered">
+                <span id="radioError" style="display:none; color:red;">Please select atleast one offering.</span>
+                <table class="table table-striped table-bordered" id="coursesOfferingTable">
                     <thead>
                         <tr>
                             <th scope="col">Select</th> 
@@ -82,36 +74,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <input type="radio" name="offeringRadio" id="offering_1" value="1">
-                            </td> 
-                            <td>Thomas Wayne</td> 
-                            <td>Mon, Wed, Fri</td> 
-                            <td>9:05 AM</td> 
-                            <td>9:55 AM</td> 
-                            <td>5 seats left</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="radio" name="offeringRadio" id="offering_2" value="2">
-                            </td> 
-                            <td>Marth Wayne</td> 
-                            <td>Tue, Thu</td> 
-                            <td>3:05 PM</td> 
-                            <td>4:20 PM</td> 
-                            <td>18 seats left</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="radio" name="offeringRadio" id="offering_3" value="3">
-                            </td> 
-                            <td>Leslie Thompkins</td> 
-                            <td>Tue, Thu</td> 
-                            <td>4:35 PM</td> 
-                            <td>5:50 PM</td> 
-                            <td>None</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -120,13 +82,19 @@
         <div class="row">
             <div class="col-md-9"></div>
             <div class="col-md-1" style="text-align: center;">
-                <button class="btn btn-primary">Add to cart</button>
+                <button class="btn btn-primary" type="submit" id="addToCartBtn">Add to cart</button>
             </div>
             <div class="col-md-2"></div>
         </div>
     </div>
 
     <script src="../static/js/app/student/selectCourses.js"></script>
+    <?php 
+        if(isset($_SESSION['addToCartStatus'])){
+            echo "<script> displayMessage('".$_SESSION['addToCartStatus']."')</script>";
+            unset($_SESSION['addToCartStatus']);
+        }
+    ?>
     <script>
         $('#mainNavBar #selectCourses').addClass('active');
     </script>

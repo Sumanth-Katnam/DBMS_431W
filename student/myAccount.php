@@ -131,7 +131,7 @@
     <script src="../static/js/app/student/myAccount.js"></script>
     <?php 
         if(isset($_SESSION['myAccountUpdate'])){
-            echo "<script> displayMessage(".isset($_SESSION['myAccountUpdate']).")</script>";
+            echo "<script> displayMessage(".$_SESSION['myAccountUpdate'].")</script>";
             unset($_SESSION['myAccountUpdate']);
         }
     ?>
