@@ -3,20 +3,18 @@
 //fetch.php
 
 require '../../commons/config.php';
-$column = array("dept_id", "dept_name", "course_id", "course_name", "instructor_id", "instructor_name", "total");
+$column = array("instructor_id", "instructor_name", "occurrence", "start_time", "end_time");
 
-$query = "SELECT * FROM Report1 ";
+$query = "SELECT * FROM Report3 ";
 
 if(isset($_POST["search"]["value"]))
 {
  $query .= '
- WHERE dept_id LIKE "%'.$_POST["search"]["value"].'%"
- OR dept_name LIKE "%'.$_POST["search"]["value"].'%"
- OR course_id LIKE "%'.$_POST["search"]["value"].'%"
- OR course_name LIKE "%'.$_POST["search"]["value"].'%"
- OR instructor_id LIKE "%'.$_POST["search"]["value"].'%"
+ WHERE instructor_id LIKE "%'.$_POST["search"]["value"].'%"
  OR instructor_name LIKE "%'.$_POST["search"]["value"].'%"
- OR total LIKE "%'.$_POST["search"]["value"].'%"
+ OR occurrence LIKE "%'.$_POST["search"]["value"].'%"
+ OR start_time LIKE "%'.$_POST["search"]["value"].'%"
+ OR end_time LIKE "%'.$_POST["search"]["value"].'%"
  ';
 }
 
@@ -52,13 +50,11 @@ $data = array();
 foreach($result as $row)
 {
  $sub_array = array();
- $sub_array[] = $row['dept_id'];
- $sub_array[] = $row['dept_name'];
- $sub_array[] = $row['course_id'];
- $sub_array[] = $row['course_name'];
  $sub_array[] = $row['instructor_id'];
  $sub_array[] = $row['instructor_name'];
- $sub_array[] = $row['total'];
+ $sub_array[] = $row['occurrence'];
+ $sub_array[] = $row['start_time'];
+ $sub_array[] = $row['end_time'];
  $data[] = $sub_array;
 }
 
