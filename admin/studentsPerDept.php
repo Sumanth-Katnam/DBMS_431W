@@ -39,71 +39,24 @@
                         <th scope="col">Total enrollment</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td> 
-                        <td>Computer Science</td> 
-                        <td>13</td> 
-                        <td>Database Management System</td> 
-                        <td>13</td> 
-                        <td>Thomas Wayne</td> 
-                        <td>81</td> 
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>Computer Engineering</td>
-                        <td>2</td> 
-                        <td>Operating System</td> 
-                        <td>22</td> 
-                        <td>Martha Wayne</td> 
-                        <td>41</td> 
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Electrical Engineering</td>
-                        <td>3</td> 
-                        <td>Cloud computing</td> 
-                        <td>26</td> 
-                        <td>Leslie Thompkins</td>
-                        <td>16</td>
-                    </tr>
-                    <tr>
-                        <td>1</td> 
-                        <td>Computer Science</td> 
-                        <td>4</td> 
-                        <td>Computer Security</td> 
-                        <td>8</td> 
-                        <td>Bob Kane</td> 
-                        <td>16</td> 
-                    </tr>
-                    <tr>
-                        <td>1</td> 
-                        <td>Computer Science</td> 
-                        <td>13</td>
-                        <td>Algorithms and Data structures</td> 
-                        <td>17</td> 
-                        <td>Bill Finger</td> 
-                        <td>86</td> 
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>Computer Engineering</td>
-                        <td>9</td>
-                        <td>Computer Architecture</td> 
-                        <td>17</td> 
-                        <td>Michael Keaton</td> 
-                        <td>86</td> 
-                    </tr>
-                </tbody>
+                <tbody></tbody>
             </table>
         </div>
         <div class="col-md-2"></div>
     </div>
     
-    <script>
+    <script type="text/javascript" language="javascript" >
         $('#mainNavBar #report1').addClass('active');
         $(document).ready(function(){
-            $('table').dataTable();
+            var dataTable = $('#table').DataTable({
+            "processing" : true,
+            "serverSide" : true,
+            "order" : [],
+            "ajax" : {
+                url : "../php/admin/p_studentsPerDept.php",
+                type : "POST"
+                }
+            });
         });
     </script>
 <?php endblock() ?>
