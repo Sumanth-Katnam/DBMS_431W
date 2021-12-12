@@ -3,7 +3,7 @@
     //fetch.php
 
     require '../../commons/config.php';
-    $column = array("course_name", "instructor_name", "occurrence", "start_time");
+    $column = array("course_id", "course_name", "instructor_id", "instructor_name", "occurrence", "start_time", "end_time", "count", "availability");
 
     $query = "SELECT * FROM Report4 ";
 
@@ -17,6 +17,7 @@
             OR start_time LIKE "%'.$_POST["search"]["value"].'%"
             OR end_time LIKE "%'.$_POST["search"]["value"].'%"
             OR count LIKE "%'.$_POST["search"]["value"].'%"
+            OR availability LIKE "%'.$_POST["search"]["value"].'%"
             ';
     }
 
@@ -48,6 +49,7 @@
         $sub_array[] = $row['start_time'];
         $sub_array[] = $row['end_time'];
         $sub_array[] = $row['count'];
+        $sub_array[] = $row['availability'];
         $data[] = $sub_array;
     }
 
