@@ -1,9 +1,9 @@
 const loadCartEntries = () => {
   request = $.ajax({
-    url: '../php/student/p_myCourses.php',
+    url: '../php/student/p_cart.php',
     type: 'POST',
     datatype: 'json',
-    data: { func: 'retrieveMyCourses' },
+    data: { func: 'retrieveCartEntries' },
     success: function (cartEntries) {
       populateCartEntries(JSON.parse(cartEntries));
     },
