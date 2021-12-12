@@ -154,27 +154,37 @@ const addToCart = (offeringId) => {
 };
 
 const displayMessage = (status) => {
-  const $row = $('#messageRow');
-  let alertClass;
-  let messageType;
-  let messageText;
-  status = status.toLowerCase();
-  if (status === 'success') {
-    alertClass = 'alert-info';
-    messageType = 'Success';
-    messageText = 'The course has been successfully added to cart.';
-  } else if (status === 'duplicate') {
-    alertClass = 'alert-warning';
-    messageType = 'Info';
-    messageText = 'The selected course already exists in your cart.';
-  } else {
-    alertClass = 'alert-danger';
-    messageType = 'Error';
-    messageText = 'Some error occured. Please try again later.';
-  }
+  const _messages = {
+    success: {
+      alertClass: 'alert-info',
+      messageType: 'Success',
+      messageText: 'The course has been successfully added to cart.',
+    },
+    duplicateCart: {
+      alertClass: 'alert-warning',
+      messageType: 'Info',
+      messageText: 'The selected course already exists in your cart.',
+    },
+    duplicateTaken: {
+      alertClass: 'alert-warning',
+      messageType: 'Info',
+      messageText: 'You have arleady enrolled for the selected course.',
+    },
+    error: {
+      alertClass: 'alert-danger',
+      messageType: 'Error',
+      messageText: 'Some error occured. Please try again later.',
+    },
+  };
 
-  $row.find('strong#message').text(messageType + ': ' + messageText);
-  $row.find('#alertBox').addClass(alertClass);
+  const $row = $('#messageRow');
+  status = status.toLowerCase();
+  messageJson = _messages[status];
+
+  $row
+    .find('strong#message')
+    .text(messageJson['messageType'] + ': ' + messageJson['messageText']);
+  $row.find('#alertBox').addClass(messageJson['alertClass']);
   $row.toggle(true);
 };
 
@@ -195,14 +205,16 @@ $(document).ready(function () {
 
   // Add to cart handler -- check if already exists in db in php
   $('#addToCartBtn').on('click', function () {
+    $('span#radioError').toggle(false);
     const offeringId = $(
       'input[name=offeringRadio]:checked',
       '#coursesOfferingTable'
     ).val();
 
-    $('span#radioError').toggle(offeringId === undefined);
     if (!(offeringId === undefined)) {
       addToCart(offeringId);
+    } else {
+      $('span#radioError').toggle(true);
     }
   });
 });

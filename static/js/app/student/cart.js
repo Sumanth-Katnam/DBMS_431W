@@ -27,7 +27,7 @@ const populateCartEntries = (entries) => {
         .append($('<td>').text(entry.occurrence))
         .append($('<td>').text(entry.schedule_time))
         .append($('<td>').text(entry.room_name))
-        .append($('<td>').text(entry.status))
+        .append($('<td>').attr('class', 'statusCol').text('entry.status'))
         .append(
           $('<td>').append(
             $('<button>')
@@ -74,8 +74,7 @@ const dropCartCourse = (entryId) => {
     datatype: 'json',
     data: { func: 'dropCartCourse', entry_id: entryId },
     success: function (isSuccess) {
-      if (isSuccess) _removeRow(entryId);
-      displayMessage(isSuccess);
+      location.reload();
     },
     error: function (XMLHttpRequest, textStatus, errorThrown) {
       console.log('Status: ' + textStatus);
@@ -84,16 +83,40 @@ const dropCartCourse = (entryId) => {
   });
 };
 
-const displayMessage = (isSuccess) => {
+const displayMessage = (action, isSuccess) => {
+  const _messages = {
+    dropCart: {
+      success: {
+        alertClass: 'alert-info',
+        messageType: 'Success',
+        messageText: 'Course has been successfully removed from cart.',
+      },
+      error: {
+        alertClass: 'alert-danger',
+        messageType: 'Error',
+        messageText: 'Some error occurred. Please try later.',
+      },
+    },
+    enrollment: {
+      success: {
+        alertClass: 'alert-info',
+        messageType: 'Success',
+        messageText: 'Your Enrollment is successful.',
+      },
+      error: {
+        alertClass: 'alert-danger',
+        messageType: 'Error',
+        messageText: 'Some error occurred. Please try later.',
+      },
+    },
+  };
   const $row = $('#messageRow');
-  const alertClass = isSuccess ? 'alert-info' : 'alert-danger';
-  const messageType = isSuccess ? 'Success' : 'Failure';
-  const messageText = isSuccess
-    ? 'Course has been successfully removed from cart.'
-    : 'Some error occurred. Please try later.';
 
-  $row.find('strong#message').text(messageType + ': ' + messageText);
-  $row.find('#alertBox').addClass(alertClass);
+  const _messageObj = _messages[action][isSuccess];
+  $row
+    .find('strong#message')
+    .text(_messageObj['messageType'] + ': ' + _messageObj['messageText']);
+  $row.find('#alertBox').addClass(_messageObj['alertClass']);
   $row.toggle(true);
 };
 
@@ -107,6 +130,32 @@ const removeEntryHandler = (entryId) => {
   });
 };
 
+const finishEnrollment = () => {
+  request = $.ajax({
+    url: '../php/student/p_cart.php',
+    type: 'POST',
+    datatype: 'json',
+    data: { func: 'finishEnrollment' },
+    success: function (cartEntries) {
+      populateCartEntries(JSON.parse(cartEntries));
+    },
+    error: function (XMLHttpRequest, textStatus, errorThrown) {
+      console.log('Status: ' + textStatus);
+      console.log('Error: ' + errorThrown);
+    },
+  });
+};
+
+const finishEnrollHandler = () => {
+  const question = 'Are you sure you enroll into these courses?';
+  ConfirmDialog('Warning', question).then(function (response) {
+    if (response) {
+      // finishEnrollment();
+      console.log('good');
+    }
+  });
+};
+
 $(document).ready(function () {
   loadCartEntries();
   $('#cartEntriesTable')
@@ -116,15 +165,21 @@ $(document).ready(function () {
     });
 
   $('#finishEnrollBtn').on('click', function () {
-    // check the status... only when all are Good then go ahead else error
-    const question = 'Are you sure you enroll into these courses?';
-    alertDialog('Warning', question).then(function (response) {
-      if (response) {
-        alert('this is obviously ' + response); //TRUE
-      } else {
-        alert('and then there is ' + response); //FALSE
-        // $('span#radioError').toggle(offeringId === undefined);
-      }
-    });
+    $('span#enrollError').toggle(false);
+    goodStatusCount = $('#cartEntriesTable')
+      .find('tbody')
+      .find('.statusCol')
+      .filter(function () {
+        return $(this).text() == 'entry.status';
+      }).length;
+
+    totalRowCount = $tableBody = $('#cartEntriesTable')
+      .find('tbody')
+      .find('tr').length;
+    if (goodStatusCount == totalRowCount) {
+      finishEnrollHandler();
+    } else {
+      $('span#enrollError').toggle(true);
+    }
   });
 });

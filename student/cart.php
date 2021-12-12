@@ -30,7 +30,7 @@
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8">
-                <span id="radioError" style="display:none; color:red;">Please select atleast one offering.</span>
+                <span id="enrollError" style="display:none; color:red;">Please make sure all cart selections are good before you finish enrolling.</span>
                 <table class="table table-striped table-bordered" id="cartEntriesTable">
                     <thead>
                         <tr>
@@ -61,6 +61,15 @@
     </div>
 
     <script src="../static/js/app/student/cart.js"></script>
+    <?php 
+        if(isset($_SESSION['dropCartStatus'])){
+            echo "<script> displayMessage('dropCart', ".$_SESSION['dropCartStatus'].")</script>";
+            unset($_SESSION['dropCartStatus']);
+        } elseif(isset($_SESSION['enrollmentStatus'])){
+            echo "<script> displayMessage('enrollment', ".$_SESSION['enrollmentStatus'].")</script>";
+            unset($_SESSION['enrollmentStatus']);
+        }
+    ?>
     <script>
         $('#mainNavBar #cart').addClass('active');
     </script>

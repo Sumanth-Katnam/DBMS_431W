@@ -1,11 +1,14 @@
 <?php 
     if(isset($_POST['func'])) {
-        if($_POST['func'] === "retrieveCartEntries"){
+        if($_POST['func'] === "retrieveCartEntries") {
             retrieveCartEntries();
-        }elseif($_POST['func'] === "dropCartCourse"){
+        } elseif($_POST['func'] === "dropCartCourse") {
             dropCartCourse($_POST);
+        } elseif($_POST['func'] === "finishEnrollment") {
+            finishEnrollment();
         }
     }
+    
 
     function retrieveCartEntries() {
         require '../../commons/config.php';
@@ -47,6 +50,36 @@
 
         $entry_id = $postData['entry_id'];
         $delete = "DELETE FROM courses_cart_entry WHERE cart_entry_id='$entry_id' ";
-        echo $con->query($delete);
+        $_SESSION['dropCartStatus'] = $con->query($delete);
+        echo true;
+    }
+
+
+    function finishEnrollment() {
+        require '../../commons/config.php';
+
+        try{
+            $id = $_SESSION['user_id'];
+            
+            $con->begin_transaction();
+
+            $insertTakenQuery = "INSERT INTO courses_taken (student_id, offering_id)
+                SELECT student_id, offering_id
+                FROM courses_cart_entry
+                WHERE student_id='$id'";
+            if($con->query($insertTakenQuery)) {
+                $deleteCartStatement = "DELETE FROM courses_cart_entry WHERE student_id='$id'";
+                if($con->query($deleteCartStatement)) {
+                    $_SESSION['enrollmentStatus']  = 'success';
+                    $con->commit();
+                }
+            } else {
+                $_SESSION['enrollmentStatus']  = 'error';
+                $con->rollback();
+            }
+        } catch (Exception $ex) {
+            $_SESSION['enrollmentStatus']  = 'error';
+            $con->rollback();
+        }
     }
 ?>
