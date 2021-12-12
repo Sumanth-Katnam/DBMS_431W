@@ -96,6 +96,9 @@
                 if($con->query($deleteCartStatement)) {
                     $_SESSION['enrollmentStatus']  = 'success';
                     $con->commit();
+                }else{
+                        $_SESSION['enrollmentStatus']  = 'error';
+                        $con->rollback();
                 }
             } else {
                 $_SESSION['enrollmentStatus']  = 'error';
