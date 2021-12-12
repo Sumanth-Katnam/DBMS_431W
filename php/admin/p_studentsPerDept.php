@@ -49,7 +49,7 @@
 
     function count_all_data() {
         global $con;
-        $countQuery = "SELECT COUNT(*) FROM Report1";
+        $countQuery = "SELECT COUNT(*) FROM report1";
         $result = mysqli_query($con, $countQuery);
         $count = mysqli_fetch_assoc($result);
         return $count['COUNT(*)'];
