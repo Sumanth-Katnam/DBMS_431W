@@ -54,8 +54,8 @@ CREATE VIEW Report4 AS
 SELECT C.course_name, concat(I.fname," ",I.mname," ",I.lname) as instructor_name, S.occurrence, S.start_time, S.end_time, D.count
 FROM ref_courses C, ref_instructors I, ref_schedules S, courses_cart_entry A, course_offerings B,
     (SELECT b.course_id,count(*) as count
-    FROM course_offerings b, ref_courses c
-    WHERE b.course_id =  c.course_id
+    FROM course_offerings b, ref_courses c, courses_cart_entry CE
+    WHERE b.course_id =  c.course_id and b.offering_id = CE.offering_id
     GROUP BY b.course_id) D
 WHERE A.offering_id = B.offering_id
 AND B.course_id = C.course_id
