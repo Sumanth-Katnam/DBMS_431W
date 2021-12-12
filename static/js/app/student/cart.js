@@ -62,12 +62,6 @@ const checkEmpty = () => {
 };
 
 const dropCartCourse = (entryId) => {
-  const _removeRow = (entryId) => {
-    $tableBody = $('#cartEntriesTable').find('tbody');
-    $tableBody.find('tr#entry_' + entryId).remove();
-    checkEmpty();
-  };
-
   request = $.ajax({
     url: '../php/student/p_cart.php',
     type: 'POST',
@@ -151,8 +145,7 @@ const finishEnrollHandler = () => {
   const question = 'Are you sure you enroll into these courses?';
   ConfirmDialog('Warning', question).then(function (response) {
     if (response) {
-      // finishEnrollment();
-      console.log('good');
+      finishEnrollment();
     }
   });
 };
