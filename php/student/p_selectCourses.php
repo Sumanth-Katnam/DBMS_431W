@@ -1,52 +1,32 @@
 <?php 
-    $refStudent;
-    
-    if(isset($_POST['submit'])){
-        submitForm($_POST);
-    } elseif(isset($_POST['func'])) {
-        if($_POST['func'] === "retrieveCourses"){
+    if(isset($_POST['func'])) {
+        if($_POST['func'] === "retrieveDepartments"){
+            retrieveDepartments();
+        }elseif($_POST['func'] === "retrieveCourses"){
             retrieveCourses($_POST);
         } elseif($_POST['func'] === "retrieveOfferings"){
             retrieveOfferings($_POST);
+        } elseif($_POST['func'] === "addToCart"){
+            addToCart($_POST);
         }
     }
 
-    function submitForm($postData){
+    function retrieveDepartments() {
         require '../../commons/config.php';
-        include '../../models/RefStudent.php';
-        $id = $_SESSION['user_id'];
-        $refStudent = new RefStudent($postData['student_id'], $postData['fname'], 
-            $postData['mname'], $postData['lname'], 
-            $postData['email_id'], $postData['last_logged_in'], 
-            $postData['countryCodeDrpdwn'], $postData['phoneNumber']);
-        
-        $update = "UPDATE ref_students 
-            SET fname='$refStudent->fname',
-            mname='$refStudent->mname',
-            lname='$refStudent->lname',
-            country_code='$refStudent->country_code',
-            phone_number='$refStudent->phone_number'
-            WHERE student_id='$id' ";
+        include '../../models/RefDepartment.php';
 
-        $con->query($update);
-        $_SESSION['myAccountUpdate']  = $con->affected_rows === 1;
-        
-        // Updating session variables for display
-        $_SESSION['fname']  = $refStudent->fname;
-        $_SESSION['mname']  = $refStudent->mname;
-        $_SESSION['lname']  = $refStudent->lname;
-        header("location: ../../student/myAccount.php");
-    }
+        $refDepartments = [];
+        $select_query=  "SELECT * from ref_department";
 
-    function utf8ize($d) {
-        if (is_array($d)) {
-            foreach ($d as $k => $v) {
-                $d[$k] = utf8ize($v);
+        if(!$departments = mysqli_query($con, $select_query)) {
+            echo "Failed to retrieve departments";
+        } else {
+            while($dept = mysqli_fetch_assoc($departments)){
+                $deptObj = new RefDepartment($dept['dept_id'], $dept['dept_name']);
+                array_push($refDepartments, $deptObj);
             }
-        } else if (is_string ($d)) {
-            return utf8_encode($d);
+            echo json_encode($refDepartments);
         }
-        return $d;
     }
 
     function retrieveCourses($postData) {
@@ -72,10 +52,52 @@
         }
     }
 
-    
+    function retrieveOfferings($postData) {
+        require '../../commons/config.php';
+        include '../../models/CourseOffering.php';
 
-    function retrieveOfferings() {
+        $course_id = $postData['course_id'];
+        $select_query = "SELECT CO.offering_id, CONCAT(I.fname, ' ', I.mname, ' ', I.lname) AS instructor_name, S.occurrence, S.start_time, S.end_time
+                FROM course_offerings CO 
+                JOIN ref_instructors I 
+                ON CO.instructor_id = I.instructor_id 
+                JOIN ref_schedules S 
+                ON CO.schedule_id = S.schedule_id
+                WHERE CO.offering_id = '$course_id'";
 
+        if(!$courseOfferings = mysqli_query($con, $select_query)) {
+            echo "Failed to retrieve course offerings";
+        } else {
+            $offeringsArr = [];
+            while($offering = mysqli_fetch_assoc($courseOfferings)){
+                $offeringObj = new CourseOffering($offering['offering_id'], $offering['instructor_name'], 
+                    $offering['occurrence'], $offering['start_time'], $offering['end_time'], '');
+                array_push($offeringsArr, $offeringObj);
+            }
+            echo json_encode($offeringsArr);
+        }
+    }
+
+    function addToCart($postData){
+        require '../../commons/config.php';
+        include '../../models/CourseCartEntry.php';
+        
+        $id = $_SESSION['user_id'];
+        $offering_id = $postData['offering_id'];
+
+        $query = "SELECT * FROM courses_cart_entry WHERE student_id='$id' AND offering_id='$offering_id'";
+        $result = mysqli_query($con, $query);
+        $count = mysqli_num_rows($result);
+
+        if($count > 0){
+            $_SESSION['addToCartStatus']  = 'duplicate';
+        } else {
+            $entryObj = new CourseCartEntry(0, $id, $postData['offering_id']);
+            $insert = "INSERT INTO courses_cart_entry (student_id, offering_id)
+                VALUES($entryObj->student_id, $entryObj->offering_id)";
+            $con->query($insert);
+            $_SESSION['addToCartStatus']  = 'success';
+        }
     }
 
 ?>
