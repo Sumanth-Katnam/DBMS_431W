@@ -27,7 +27,7 @@ const populateCartEntries = (entries) => {
         .append($('<td>').text(entry.occurrence))
         .append($('<td>').text(entry.schedule_time))
         .append($('<td>').text(entry.room_name))
-        .append($('<td>').attr('class', 'statusCol').text('entry.status'))
+        .append($('<td>').attr('class', 'statusCol').text(entry.status))
         .append(
           $('<td>').append(
             $('<button>')
@@ -84,6 +84,7 @@ const dropCartCourse = (entryId) => {
 };
 
 const displayMessage = (action, isSuccess) => {
+  isSuccess = isSuccess ? 'success' : 'error';
   const _messages = {
     dropCart: {
       success: {
@@ -170,7 +171,7 @@ $(document).ready(function () {
       .find('tbody')
       .find('.statusCol')
       .filter(function () {
-        return $(this).text() == 'entry.status';
+        return $(this).text().indexOf('Seats') > 0;
       }).length;
 
     totalRowCount = $tableBody = $('#cartEntriesTable')
