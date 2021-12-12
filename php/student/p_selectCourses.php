@@ -67,8 +67,9 @@
 
          $select_query = "SELECT CO.offering_id, CONCAT(I.fname, ' ', I.mname, ' ', I.lname) AS instructor_name, S.occurrence, S.start_time, S.end_time, (a2.capacity-a1.filled) as availability
                         FROM ( SELECT count(*) AS filled
-                                FROM course_offerings
-                                WHERE course_id = '$course_id') a1,
+                                FROM course_offerings CO, courses_taken CT
+                                WHERE CO.offering_id = CT.offering_id
+                                AND course_id = '$course_id') a1,
                         (SELECT r.capacity
                             FROM ref_room r, course_offerings c
                             WHERE r.room_id = c.room_id
