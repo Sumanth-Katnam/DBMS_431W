@@ -74,7 +74,12 @@
 
         $entry_id = $postData['entry_id'];
         $delete = "DELETE FROM courses_cart_entry WHERE cart_entry_id='$entry_id' ";
-        $_SESSION['dropCartStatus'] = $con->query($delete);
+        if($con->query($delete)){
+            $_SESSION['dropCartStatus'] = 'success';
+        } else {
+            $_SESSION['dropCartStatus'] = 'error';
+        }
+        
         echo true;
     }
 
