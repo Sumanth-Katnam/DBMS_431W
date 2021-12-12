@@ -31,7 +31,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Room name</th>
-                        <th scope="col">Slot Occurence</th>
+                        <th scope="col">Slot Occurrence</th>
                         <th scope="col">Slot Start time</th>
                         <th scope="col">slot End time</th>
                     </tr>

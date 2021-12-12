@@ -26,7 +26,7 @@
                         <th scope="col">Sno</th> 
                         <th scope="col">Course Name</th> 
                         <th scope="col">Instructor name</th> 
-                        <th scope="col">Occurence</th> 
+                        <th scope="col">Occurrence</th> 
                         <th scope="col">Schedule</th> 
                         <th scope="col">Room no</th> 
                         <th scope="col">Actions</th>

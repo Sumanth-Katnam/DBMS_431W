@@ -117,7 +117,7 @@ const populateOfferings = (offeringsList) => {
           )
         )
         .append($('<td>').text(offering.instructor_name))
-        .append($('<td>').text(offering.occurence))
+        .append($('<td>').text(offering.occurrence))
         .append($('<td>').text(offering.start_time))
         .append($('<td>').text(offering.end_time))
         .append($('<td>').text(offering.availability))
@@ -125,7 +125,7 @@ const populateOfferings = (offeringsList) => {
   };
 
   $.each(offeringsList, function (i, offering) {
-    _appendOfferingRow(i, offering);
+    _appendOfferingRow(i + 1, offering);
   });
 };
 

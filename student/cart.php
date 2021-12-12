@@ -20,13 +20,13 @@
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8">
-                <table class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered" id="cartEntriesTable">
                     <thead>
                         <tr>
                             <th scope="col">Sno</th> 
                             <th scope="col">Course Name</th> 
                             <th scope="col">Instructor name</th> 
-                            <th scope="col">Occurence</th> 
+                            <th scope="col">Occurrence</th> 
                             <th scope="col">Schedule</th> 
                             <th scope="col">Room no</th> 
                             <th scope="col">Status</th> 
@@ -34,46 +34,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td> 
-                            <td>Database Management System</td> 
-                            <td>Thomas Wayne</td> 
-                            <td>Mon, Wed, Fri</td> 
-                            <td>9:05 AM - 9:55 AM</td> 
-                            <td>Room 32</td> 
-                            <td>Good</td> 
-                            <td><button class="btn btn-warning removeClassBtn"><i class="fas fa-trash"></i> Remove</button></td>
-                        </tr>
-                        <tr>
-                            <td>2</td> 
-                            <td>Operating System</td> 
-                            <td>Martha Wayne</td> 
-                            <td>Tue, Thu</td> 
-                            <td>3:05 PM - 4:20 PM</td> 
-                            <td>Room 41</td> 
-                            <td>Conflicting</td>
-                            <td><button class="btn btn-warning removeClassBtn"><i class="fas fa-trash"></i> Remove</button></td>
-                        </tr>
-                        <tr>
-                            <td>3</td> 
-                            <td>Cloud computing</td> 
-                            <td>Leslie Thompkins</td> 
-                            <td>Tue, Thu</td> 
-                            <td>3:05 PM - 4:20 PM</td> 
-                            <td>Room 16</td> 
-                            <td>Conflicting</td>
-                            <td><button class="btn btn-warning removeClassBtn"><i class="fas fa-trash"></i> Remove</button></td>
-                        </tr>
-                        <tr>
-                            <td>4</td> 
-                            <td>Computer Security</td> 
-                            <td>Bob Kane</td> 
-                            <td>Mon, Wed, Fri</td> 
-                            <td>3:05 PM - 4:20 PM</td> 
-                            <td>Room 16</td> 
-                            <td>Class Full</td>
-                            <td><button class="btn btn-warning removeClassBtn"><i class="fas fa-trash"></i> Remove</button></td>
-                        </tr>
                     </tbody>
                 </table>
             </div>

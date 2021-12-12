@@ -32,7 +32,7 @@
                     <tr>
                         <th scope="col">Instructor ID</th>
                         <th scope="col">Instructor name</th>
-                        <th scope="col">Occurence</th>
+                        <th scope="col">Occurrence</th>
                         <th scope="col">Start time</th>
                         <th scope="col">End time</th>
                     </tr>
