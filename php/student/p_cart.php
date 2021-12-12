@@ -2,12 +2,8 @@
     if(isset($_POST['func'])) {
         if($_POST['func'] === "retrieveCartEntries"){
             retrieveCartEntries();
-        }elseif($_POST['func'] === "retrieveCourses"){
-            retrieveCourses($_POST);
-        } elseif($_POST['func'] === "retrieveOfferings"){
-            retrieveOfferings($_POST);
-        } elseif($_POST['func'] === "addToCart"){
-            addToCart($_POST);
+        }elseif($_POST['func'] === "dropCartCourse"){
+            dropCartCourse($_POST);
         }
     }
 
@@ -33,7 +29,7 @@
                 WHERE CE.student_id = '$id';";
 
         if(!$cartEntries = mysqli_query($con, $select_query)) {
-            echo "Failed to retrieve cartEntries";
+            echo "Failed to retrieve Cart Entries";
         } else {
             $entriesArr = [];
             while($entry = mysqli_fetch_assoc($cartEntries)){
@@ -44,5 +40,13 @@
             }
             echo json_encode($entriesArr);
         }
+    }
+
+    function dropCartCourse($postData) {
+        require '../../commons/config.php';
+
+        $entry_id = $postData['entry_id'];
+        $delete = "DELETE FROM courses_cart_entry WHERE cart_entry_id='$entry_id' ";
+        echo $con->query($delete);
     }
 ?>

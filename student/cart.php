@@ -6,6 +6,16 @@
 
 <?php startblock('content') ?>
    <div class="container">
+       <div class="row" id="messageRow" style="display: none;">
+            <div class="col-md-12">
+                <div class="alert fade show" role="alert" id="alertBox">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong id="message"></strong>
+                </div>
+            </div>
+        </div>
+        <br>
+
         <div class="row" id="infoRow">
             <div class="col-md-12">
                 <div class="alert alert-primary alert-dismissible fade show" role="alert" id="alertBox">
@@ -20,6 +30,7 @@
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8">
+                <span id="radioError" style="display:none; color:red;">Please select atleast one offering.</span>
                 <table class="table table-striped table-bordered" id="cartEntriesTable">
                     <thead>
                         <tr>

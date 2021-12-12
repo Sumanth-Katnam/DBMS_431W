@@ -29,3 +29,8 @@ label {
   font-weight: bold;
   float: right;
 }
+
+.emptyRow {
+  text-align: center;
+  font-weight: bold;
+}

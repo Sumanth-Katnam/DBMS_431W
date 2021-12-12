@@ -20,7 +20,7 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
-            <table class="table table-striped table-bordered">
+            <table class="table table-striped table-bordered" id="coursesTakenTable">
                 <thead>
                     <tr>
                         <th scope="col">Sno</th> 
@@ -33,33 +33,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td> 
-                        <td>Database Management System</td> 
-                        <td>Thomas Wayne</td> 
-                        <td>Mon, Wed, Fri</td> 
-                        <td>9:05 AM - 9:55 AM</td> 
-                        <td>Room 32</td> 
-                        <td><button class="btn btn-warning dropClassBtn">Drop class</button></td>
-                    </tr>
-                    <tr>
-                        <td>2</td> 
-                        <td>Operating System</td> 
-                        <td>Martha Wayne</td> 
-                        <td>Tue, Thu</td> 
-                        <td>3:05 PM - 4:20 PM</td> 
-                        <td>Room 41</td> 
-                        <td><button class="btn btn-warning dropClassBtn">Drop class</button></td>
-                    </tr>
-                    <tr>
-                        <td>3</td> 
-                        <td>Cloud computing</td> 
-                        <td>Leslie Thompkins</td> 
-                        <td>Mon, Wed, Fri</td> 
-                        <td>4:35 PM - 5:50 PM</td> 
-                        <td>Room 16</td> 
-                        <td><button class="btn btn-warning dropClassBtn">Drop class</button></td>
-                    </tr>
                 </tbody>
             </table>
         </div>
