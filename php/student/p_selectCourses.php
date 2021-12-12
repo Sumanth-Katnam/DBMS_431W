@@ -99,17 +99,27 @@
         $id = $_SESSION['user_id'];
         $offering_id = $postData['offering_id'];
 
-        $query = "SELECT * FROM courses_cart_entry WHERE student_id='$id' AND offering_id='$offering_id'";
-        $result = mysqli_query($con, $query);
-        $count = mysqli_num_rows($result);
+        $cartQuery = "SELECT * FROM courses_cart_entry WHERE student_id='$id' AND offering_id='$offering_id'";
+        $cartResult = mysqli_query($con, $cartQuery);
+        $cartCount = mysqli_num_rows($cartResult);
 
-        if($count > 0){
-            $_SESSION['addToCartStatus']  = 'duplicate';
+        $takenQuery = "SELECT * FROM courses_taken WHERE student_id='$id' AND offering_id='$offering_id'";
+        $takenResult = mysqli_query($con, $takenQuery);
+        $takenCount = mysqli_num_rows($takenResult);
+
+        if($cartCount > 0){
+            $_SESSION['addToCartStatus']  = 'duplicateCart';
+        } elseif($takenCount > 0){
+            $_SESSION['addToCartStatus']  = 'duplicateTaken';
         } else {
-            $insert = "INSERT INTO courses_cart_entry (student_id, offering_id)
-                VALUES($id, $offering_id)";
-            $con->query($insert);
-            $_SESSION['addToCartStatus']  = 'success';
+            try{
+                $insert = "INSERT INTO courses_cart_entry (student_id, offering_id)
+                    VALUES($id, $offering_id)";
+                $con->query($insert);
+                $_SESSION['addToCartStatus']  = 'success';
+            } catch(Exception $e){
+                $_SESSION['addToCartStatus']  = 'error';
+            }
         }
     }
 
