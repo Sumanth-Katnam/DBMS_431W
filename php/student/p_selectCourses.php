@@ -63,7 +63,7 @@
                 ON CO.instructor_id = I.instructor_id 
                 JOIN ref_schedules S 
                 ON CO.schedule_id = S.schedule_id
-                WHERE CO.offering_id = '$course_id'";
+                WHERE CO.course_id = '$course_id'";
 
         if(!$courseOfferings = mysqli_query($con, $select_query)) {
             echo "Failed to retrieve course offerings";
@@ -80,7 +80,6 @@
 
     function addToCart($postData){
         require '../../commons/config.php';
-        include '../../models/CourseCartEntry.php';
         
         $id = $_SESSION['user_id'];
         $offering_id = $postData['offering_id'];
@@ -92,9 +91,8 @@
         if($count > 0){
             $_SESSION['addToCartStatus']  = 'duplicate';
         } else {
-            $entryObj = new CourseCartEntry(0, $id, $postData['offering_id']);
             $insert = "INSERT INTO courses_cart_entry (student_id, offering_id)
-                VALUES($entryObj->student_id, $entryObj->offering_id)";
+                VALUES($id, $offering_id)";
             $con->query($insert);
             $_SESSION['addToCartStatus']  = 'success';
         }

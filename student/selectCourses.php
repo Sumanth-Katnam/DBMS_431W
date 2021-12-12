@@ -67,7 +67,7 @@
                         <tr>
                             <th scope="col">Select</th> 
                             <th scope="col">Instructor</th> 
-                            <th scope="col">Occurence</th> 
+                            <th scope="col">Occurrence</th> 
                             <th scope="col">Start Time</th> 
                             <th scope="col">End Time</th> 
                             <th scope="col">Availability</th> 

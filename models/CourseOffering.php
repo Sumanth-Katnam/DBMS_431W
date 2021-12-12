@@ -2,16 +2,16 @@
     class CourseOffering {
         public $offering_id;
         public $instructor_name;
-        public $occurence;
+        public $occurrence;
         public $start_time;
         public $end_time;
         public $availability;
 
-        public function __construct($offering_id, $instructor_name, $occurence, $start_time, $end_time, $availability)
+        public function __construct($offering_id, $instructor_name, $occurrence, $start_time, $end_time, $availability)
         {
             $this->offering_id = $offering_id;
             $this->instructor_name = $instructor_name;
-            $this->occurence = $occurence;
+            $this->occurrence = $occurrence;
             $this->start_time = $start_time;
             $this->end_time = $end_time;
             $this->availability = $availability;
