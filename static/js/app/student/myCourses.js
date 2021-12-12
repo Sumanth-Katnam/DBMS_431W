@@ -42,7 +42,11 @@ const populateCourses = (courses) => {
   $.each(courses, function (i, course) {
     _addCourseRow(i + 1, course);
   });
+  checkEmpty();
+};
 
+const checkEmpty = () => {
+  $tableBody = $('#coursesTakenTable').find('tbody');
   rowsCount = $tableBody.find('tr').length;
   if (rowsCount == 0) {
     $tableBody.append(
@@ -60,6 +64,7 @@ const dropCourse = (takenId) => {
   const _removeRow = (takenId) => {
     $tableBody = $('#coursesTakenTable').find('tbody');
     $tableBody.find('tr#course_' + takenId).remove();
+    checkEmpty();
   };
 
   request = $.ajax({

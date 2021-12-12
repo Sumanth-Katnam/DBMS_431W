@@ -43,7 +43,11 @@ const populateCartEntries = (entries) => {
   $.each(entries, function (i, entry) {
     _addCartRow(i + 1, entry);
   });
+  checkEmpty();
+};
 
+const checkEmpty = () => {
+  $tableBody = $('#cartEntriesTable').find('tbody');
   rowsCount = $tableBody.find('tr').length;
   if (rowsCount == 0) {
     $tableBody.append(
@@ -61,6 +65,7 @@ const dropCartCourse = (entryId) => {
   const _removeRow = (entryId) => {
     $tableBody = $('#cartEntriesTable').find('tbody');
     $tableBody.find('tr#entry_' + entryId).remove();
+    checkEmpty();
   };
 
   request = $.ajax({
