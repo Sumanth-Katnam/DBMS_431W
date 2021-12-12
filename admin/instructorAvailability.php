@@ -37,59 +37,25 @@
                         <th scope="col">End time</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>13</td> 
-                        <td>Thomas Wayne</td> 
-                        <td>Mon, Wed, Fri</td> 
-                        <td>9:05 AM</td> 
-                        <td>9:55 AM</td> 
-                    </tr>
-                    <tr>
-                        <td>19</td>
-                        <td>Martha Wayne</td> 
-                        <td>Tue, Thu</td> 
-                        <td>3:05 PM</td> 
-                        <td>4:20 PM</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Leslie Thompkins</td> 
-                        <td>Mon, Wed, Fri</td> 
-                        <td>4:35 PM</td> 
-                        <td>5:50 PM</td>
-                    </tr>
-                    <tr>
-                        <td>15</td>
-                        <td>Bob Kane</td> 
-                        <td>Mon, Wed, Fri</td> 
-                        <td>4:35 PM</td> 
-                        <td>5:50 PM</td>
-                    </tr>
-                    <tr>
-                        <td>7</td> 
-                        <td>Bill Finger</td> 
-                        <td>Tue, Thu</td> 
-                        <td>4:35 PM</td> 
-                        <td>5:50 PM</td>
-                    </tr>
-                    <tr>
-                        <td>13</td> 
-                        <td>Thomas Wayne</td> 
-                        <td>Tue, Thu</td> 
-                        <td>3:05 PM</td> 
-                        <td>4:20 PM</td>
-                    </tr>
-                </tbody>
+                <tbody></tbody>
             </table>
         </div>
         <div class="col-md-2"></div>
     </div>
     
-    <script>
+    <script type="text/javascript" language="javascript" >
         $('#mainNavBar #report3').addClass('active');
         $(document).ready(function(){
-            $('table').dataTable();
+            var dataTable = $('#table').dataTable({
+                "processing" : true,
+                "serverSide" : true,
+                "order" : [],
+                "ajax" : {
+                    url : "../php/admin/p_instructoAvailability.php",
+                    type : "POST"
+                    }
+                }
+            );
         });
     </script>
 <?php endblock() ?>

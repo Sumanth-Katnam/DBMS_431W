@@ -42,72 +42,25 @@
                         <th scope="col">availability</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td> 
-                        <td>Database Management System</td> 
-                        <td>13</td> 
-                        <td>Thomas Wayne</td> 
-                        <td>Mon, Wed, Fri</td> 
-                        <td>9:05 AM</td> 
-                        <td>9:55 AM</td> 
-                        <td>81</td> 
-                        <td>21 seats left</td>
-                    </tr>
-                    <tr>
-                        <td>2</td> 
-                        <td>Operating System</td> 
-                        <td>22</td> 
-                        <td>Martha Wayne</td> 
-                        <td>Tue, Thu</td> 
-                        <td>3:05 PM</td> 
-                        <td>4:20 PM</td> 
-                        <td>41</td> 
-                        <td>53 seats left</td>
-                    </tr>
-                    <tr>
-                        <td>3</td> 
-                        <td>Cloud computing</td> 
-                        <td>26</td> 
-                        <td>Leslie Thompkins</td> 
-                        <td>Mon, Wed, Fri</td> 
-                        <td>4:35 PM</td> 
-                        <td>5:50 PM</td> 
-                        <td>16</td> 
-                        <td>Class full</td> 
-                    </tr>
-                    <tr>
-                        <td>4</td> 
-                        <td>Computer Security</td> 
-                        <td>8</td> 
-                        <td>Bob Kane</td> 
-                        <td>Mon, Wed, Fri</td> 
-                        <td>4:35 PM</td> 
-                        <td>5:50 PM</td> 
-                        <td>16</td> 
-                        <td>14 seats left</td> 
-                    </tr>
-                    <tr>
-                        <td>5</td> 
-                        <td>Algorithms and Data structures</td> 
-                        <td>17</td> 
-                        <td>Bill Finger</td> 
-                        <td>Tue, Thu</td> 
-                        <td>4:35 PM</td> 
-                        <td>5:50 PM</td> 
-                        <td>86</td> 
-                        <td>Class full</td> 
-                    </tr>
-                </tbody>
+                <tbody></tbody>
             </table>
         </div>
         <div class="col-md-2"></div>
     </div>
     
-    <script>
+    <script type="text/javascript" language="javascript" >
         $('#mainNavBar #report4').addClass('active');
         $(document).ready(function(){
-            $('table').dataTable();
+            var dataTable = $('#table').dataTable({
+                "processing" : true,
+                "serverSide" : true,
+                "order" : [],
+                "ajax" : {
+                    url : "../php/admin/p_cartEntriesPerCourse.php",
+                    type : "POST"
+                    }
+                }
+            );
         });
     </script>
 <?php endblock() ?>
