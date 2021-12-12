@@ -36,38 +36,7 @@
                         <th scope="col">slot End time</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Room 11</td> 
-                        <td>Mon, Wed, Fri</td> 
-                        <td>9:05 AM</td> 
-                        <td>9:55 AM</td> 
-                    </tr>
-                    <tr>
-                        <td>Room 22</td> 
-                        <td>Tue, Thu</td> 
-                        <td>3:05 PM</td> 
-                        <td>4:20 PM</td>
-                    </tr>
-                    <tr>
-                        <td>Room 3</td> 
-                        <td>Mon, Wed, Fri</td> 
-                        <td>4:35 PM</td> 
-                        <td>5:50 PM</td>
-                    </tr>
-                    <tr>
-                        <td>Room 16</td>
-                        <td>Mon, Wed, Fri</td> 
-                        <td>4:35 PM</td> 
-                        <td>5:50 PM</td>
-                    </tr>
-                    <tr>
-                        <td>Room 17</td>
-                        <td>Tue, Thu</td> 
-                        <td>4:35 PM</td> 
-                        <td>5:50 PM</td>
-                    </tr>
-                </tbody>
+                <tbody></tbody>
             </table>
         </div>
         <div class="col-md-2"></div>
@@ -76,7 +45,16 @@
     <script>
         $('#mainNavBar #report2').addClass('active');
         $(document).ready(function(){
-            $('table').dataTable();
+            var dataTable = $('#table').dataTable({
+                "processing" : true,
+                "serverSide" : true,
+                "order" : [],
+                "ajax" : {
+                    url : "../php/admin/p_vacantSlots.php",
+                    type : "POST"
+                    }
+                }
+            );
         });
     </script>
 <?php endblock() ?>
