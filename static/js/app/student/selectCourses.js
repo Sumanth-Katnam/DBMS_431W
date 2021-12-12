@@ -101,9 +101,10 @@ const coursesHandler = (course_id) => {
 };
 
 const populateOfferings = (offeringsList) => {
+  $tableBody = $('#coursesOfferingTable').find('tbody');
+  $tableBody.empty();
+
   const _appendOfferingRow = (rowIndex, offering) => {
-    $tableBody = $('#coursesOfferingTable').find('tbody');
-    $tableBody.empty();
     $tableBody.append(
       $('<tr>')
         .append(
@@ -127,6 +128,18 @@ const populateOfferings = (offeringsList) => {
   $.each(offeringsList, function (i, offering) {
     _appendOfferingRow(i + 1, offering);
   });
+
+  rowsCount = $tableBody.find('tr').length;
+  if (rowsCount == 0) {
+    $tableBody.append(
+      $('<tr>').append(
+        $('<td>')
+          .attr('colspan', 8)
+          .attr('class', 'emptyRow')
+          .text('No Offerings.')
+      )
+    );
+  }
 };
 
 const addToCart = (offeringId) => {
