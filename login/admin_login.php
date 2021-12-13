@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,22 +24,31 @@
             Course Registration - Admin
         </h1>
         <br>
-        <form action="adminLogin.php" method="post">
+        <form action="../php/admin/p_adminLogin.php" method="post">
             <div class="form-group">
-                <label>Username</label>
-                <input type="text" name="user" class="form-control" placeholder="Username or email" required>
+                <label>Email ID</label>
+                <input type="email" name="user" class="form-control" placeholder="Email ID" required>
             </div>
             <div class="form-group">
                 <label>Password</label>
                 <input type="password" name="pwd" class="form-control" placeholder="Password" required>
             </div>
+            <div class="form-group" style="display: none;" id="errorDiv">
+                <span id="enrollError" style="color:red;"> <?php echo $_SESSION["loginError"] ?></span>
+            </div>
+            <?php 
+                if(isset($_SESSION['loginError'])){
+                    echo "<script> $('#errorDiv').toggle(true);</script>";
+                    unset($_SESSION['loginError']);
+                }
+            ?>
             <div id="signInBtnDiv">
                 <button type="submit" name="signin" class="btn btn-dark">Sign in</button><br /><br />
             </div>
             <div class="form-group">
                 <div class="col-md-12 control">
                     <div id="otherPageLink">
-                        <a href="login.html">
+                        <a href="login.php">
                             User Login
                         </a>
                     </div>

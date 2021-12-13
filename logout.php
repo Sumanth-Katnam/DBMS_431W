@@ -13,8 +13,10 @@
         $sql1 = "UPDATE ref_students SET last_logged_in='$dt_str'
             WHERE student_id='$id' ";
         mysqli_query($con, $sql1);
+        session_destroy();
+        header("location:login/login.php");
+    } else {
+        session_destroy();
+        header("location:login/admin_login.php");
     }
-
-    session_destroy();
-    header("location:login/login.html")
 ?>

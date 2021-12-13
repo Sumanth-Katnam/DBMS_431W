@@ -110,6 +110,8 @@
                         <div class="col-md-8">
                             <!-- <input type="hidden" name="hdnPhoneNo" value="<?php echo htmlspecialchars($refStudent->phone_number) ?>"> -->
                             <input type="tel" class="form-control" name="phoneNumber" id="phoneNumber" minlength="10"
+                                pattern="[0-9]{10}"
+                                title="Please enter a phone number"
                                 maxlength="10"
                                 value="<?php echo htmlspecialchars($refStudent->phone_number) ?>">
                         </div>

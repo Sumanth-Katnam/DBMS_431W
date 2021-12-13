@@ -1,37 +1,61 @@
-<?php
-require '../commons/config.php';
+<?php session_start(); ?>
 
-session_start();
+<!DOCTYPE html>
+<html lang="en">
 
-if(isset($_POST['signin'])) {
-  login();
-}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-function login() {
-  global $con;
+    <script src="../static/js/jquery-3.6.0.min.js"></script>
 
-  $email_id = $_POST["emailId"];
-  $password = $_POST["password"];
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" media="screen">
+    <link rel="stylesheet" href="../static/css/app/application.css" media="screen">
+    <link rel="stylesheet" href="../static/css/app/login.css" media="screen">
+    <script src="../static/js/bootstrap.min.js"></script>
 
-  $query = "SELECT * FROM ref_students WHERE email_id='$email_id' AND password='$password' LIMIT 1";
-  $result = mysqli_query($con, $query);
-  $count = mysqli_num_rows($result);
+    <title>Login</title>
+</head>
 
-  if ($count == 1) {
-    $logged_in_user = mysqli_fetch_assoc($result);
+<body>
+    <div class="container">
+        <h1 class="h3 mb-3 font-weight-normal" style="text-align: center; padding-top: 15px;">
+            Course Registration
+        </h1>
+        <br>
+        <form action="../php/student/p_login.php" method="post">
+            <div class="form-group">
+                <label>Email ID</label>
+                <input type="email" name="emailId" class="form-control" placeholder="Email ID" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control" placeholder="Password" required>
+            </div>
+            <div class="form-group" style="display: none;" id="errorDiv">
+                <span id="enrollError" style="color:red;"> <?php echo $_SESSION["loginError"] ?></span>
+            </div>
+            <?php 
+                if(isset($_SESSION['loginError'])){
+                    echo "<script> $('#errorDiv').toggle(true);</script>";
+                    unset($_SESSION['loginError']);
+                }
+            ?>
+            <div id="signInBtnDiv">
+                <button type="submit" name="signin" class="btn btn-dark">Sign in</button><br /><br />
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 control">
+                    <div id="otherPageLink">
+                        <a href="admin_login.php">
+                            Admin Login
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
 
-    $_SESSION['emailId'] = $logged_in_user['email_id'];
-    $_SESSION['user_id'] = $logged_in_user['student_id'];
-    $_SESSION['fname']  = $logged_in_user['fname'];
-    $_SESSION['mname']  = $logged_in_user['mname'];
-    $_SESSION['lname']  = $logged_in_user['lname'];
-    $_SESSION['last_logged_in'] = $logged_in_user['last_logged_in'];
-    $_SESSION['is_admin']  = false;
-    header("location:../student/home.php");
-
-  } else if ($count == 0) {
-    echo "Invalid Email Id or Password";
-    header("refresh:3; url=http://localhost:8012/DBMS_431W/login/login.html");
-  }
-}
-?>
+</html>

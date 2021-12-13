@@ -11,27 +11,45 @@
         require '../../commons/config.php';
         include '../../models/RefStudent.php';
         $id = $_SESSION['user_id'];
-        $refStudent = new RefStudent($postData['student_id'], $postData['fname'], 
-            $postData['mname'], $postData['lname'], 
-            $postData['email_id'], $postData['last_logged_in'], 
-            $postData['countryCodeDrpdwn'], $postData['phoneNumber']);
+        $refStudent = new RefStudent(
+            mysqli_real_escape_string($con, $postData['student_id']), 
+            mysqli_real_escape_string($con, $postData['fname']), 
+            mysqli_real_escape_string($con, $postData['mname']), 
+            mysqli_real_escape_string($con, $postData['lname']), 
+            mysqli_real_escape_string($con, $postData['email_id']), 
+            mysqli_real_escape_string($con, $postData['last_logged_in']), 
+            mysqli_real_escape_string($con, $postData['countryCodeDrpdwn']), 
+            mysqli_real_escape_string($con, $postData['phoneNumber']));
         
         $update = "UPDATE ref_students 
-            SET fname='$refStudent->fname',
-            mname='$refStudent->mname',
-            lname='$refStudent->lname',
-            country_code='$refStudent->country_code',
-            phone_number='$refStudent->phone_number'
-            WHERE student_id='$id' ";
+            SET fname=?,
+            mname=?,
+            lname=?,
+            country_code=?,
+            phone_number=?
+            WHERE student_id=? ";
 
-        $con->query($update);
-        $_SESSION['myAccountUpdate']  = $con->affected_rows === 1;
+        $stmt = mysqli_stmt_init($con);
+
+        if(!mysqli_stmt_prepare($stmt, $update)){
+            $_SESSION['myAccountUpdate'] = 0;
+            header("location: ../../student/myAccount.php");
+        } else {
+            mysqli_stmt_bind_param($stmt, 
+                'ssssii', 
+                $refStudent->fname, $refStudent->mname, 
+                $refStudent->lname, $refStudent->country_code, 
+                $refStudent->phone_number, $id);
+
+            mysqli_stmt_execute($stmt);
+            $_SESSION['myAccountUpdate']  = $con->affected_rows === 1;
         
-        // Updating session variables for display
-        $_SESSION['fname']  = $refStudent->fname;
-        $_SESSION['mname']  = $refStudent->mname;
-        $_SESSION['lname']  = $refStudent->lname;
-        header("location: ../../student/myAccount.php");
+            // Updating session variables for display
+            $_SESSION['fname']  = $refStudent->fname;
+            $_SESSION['mname']  = $refStudent->mname;
+            $_SESSION['lname']  = $refStudent->lname;
+            header("location: ../../student/myAccount.php");
+        }
     }
 
     function retrieveUser(){
