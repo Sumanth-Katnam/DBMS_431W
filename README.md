@@ -17,8 +17,8 @@ A student logs into the portal and will be redirected to a home page. On each pa
 An Admin or a professor can login using the admin login on the portal. They will be redirected to a home page and from there they can navigate to any of the reports on the navigation bar on the top of each page in the application. Each of these reports contain insightful data from the current system and help the users in assessing the current requirements of students, professor’s availability etc.,
 
 
-##Directory structure and details
-###admin
+## Directory structure and details
+### admin
 This folder contains the php files for the pages that are accessible by admin. The pages are set of reports. These include
 
 adminHome.php -- Home page after admin login
@@ -31,7 +31,7 @@ studentsPerDept.php - This report gives the count of students per department and
 
 vacantSlots.php - This report gives all the slots that are available to book for a class.
 
-###student
+### student
 This folder contains php files for the pages that are accessible by students . These include
 
 home.php - This file contains code for home page along with last logged in information
@@ -44,10 +44,10 @@ myCourses.php - courses taken by the user.
 
 myAccount.php - student information page
 
-###commons
+### commons
 this folder contains the files for environment and UI configuration.
 
-###data
+### data
 contains the data files for all the reference tables. These include 
 
 students.csv
@@ -64,18 +64,18 @@ courses.csv
 
 course_offerings.csv
 
-###login
+### login
 This folder has the files for both student and admin login and their configuration
 
-###models
+### models
 
 contains calss objects for all the tables and reports.
 
-###php
+### php
 
 php helper functions for the main php pages
 
-###sql commands
+### sql commands
 All the sql commands involved with the database
 
 create_views.sql
@@ -88,7 +88,7 @@ tables_creation.sql
 
 updates.sql
 
-###static
+### static
 files for the css and js styles and functions
 
 
