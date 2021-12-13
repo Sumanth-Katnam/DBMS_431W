@@ -3,7 +3,7 @@
 <nav class="navbar navbar-dark bg-dark" id="mainNavBar">
     <div class="navbar-header" style="font-style:italic; font: size 25px;">
         <a class="navbar-brand" href=<?php getLink("home")?>>
-            <b>Course Registration</b> 
+            <b>Course Registration Portal</b> 
         </a>
     </div>
     <a class="navbar-brand" href=<?php getLink("home")?> id="home">

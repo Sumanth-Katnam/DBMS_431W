@@ -21,7 +21,7 @@
 <body>
     <div class="container">
         <h1 class="h3 mb-3 font-weight-normal" style="text-align: center; padding-top: 15px;">
-            Course Registration
+            Course Registration Portal
         </h1>
         <br>
         <form action="../php/student/p_login.php" method="post">
