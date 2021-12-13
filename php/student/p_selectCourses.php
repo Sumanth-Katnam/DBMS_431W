@@ -57,29 +57,27 @@
         include '../../models/CourseOffering.php';
 
         $course_id = $postData['course_id'];
-        $select_query = "SELECT CO.offering_id, CONCAT(I.fname, ' ', I.mname, ' ', I.lname) AS instructor_name, S.occurrence, S.start_time, S.end_time
-                FROM course_offerings CO 
-                JOIN ref_instructors I 
-                ON CO.instructor_id = I.instructor_id 
-                JOIN ref_schedules S 
-                ON CO.schedule_id = S.schedule_id
-                WHERE CO.course_id = '$course_id'";
 
-         $select_query = "SELECT CO.offering_id, CONCAT(I.fname, ' ', I.mname, ' ', I.lname) AS instructor_name, S.occurrence, S.start_time, S.end_time, (a2.capacity-a1.filled) as availability
-                        FROM ( SELECT count(*) AS filled
-                                FROM course_offerings CO, courses_taken CT
-                                WHERE CO.offering_id = CT.offering_id
-                                AND course_id = '$course_id') a1,
-                        (SELECT r.capacity
-                            FROM ref_room r, course_offerings c
-                            WHERE r.room_id = c.room_id
-                            and c.course_id = '$course_id') a2,
-                        course_offerings CO
-                        JOIN ref_instructors I
-                        ON CO.instructor_id = I.instructor_id
-                        JOIN ref_schedules S
-                        ON CO.schedule_id = S.schedule_id
-                        WHERE CO.course_id = '$course_id'";
+         $select_query = "SELECT CO.offering_id, CONCAT(I.fname, ' ', I.mname, ' ', I.lname) AS instructor_name, S.occurrence, S.start_time, S.end_time, a3.availability
+                                FROM course_offerings CO
+                                JOIN ref_instructors I
+                                ON CO.instructor_id = I.instructor_id
+                                JOIN ref_schedules S
+                                ON CO.schedule_id = S.schedule_id
+                                JOIN (SELECT a1.offering_id, (a2.capacity - a1.filled) as availability
+                                      FROM ( SELECT CO.offering_id, count(CT.offering_id) AS filled
+                                              FROM course_offerings CO
+                                              LEFT JOIN courses_taken CT
+                                              ON CO.offering_id = CT.offering_id
+                                              AND CO.course_id = '$course_id'
+                                              GROUP BY CO.offering_id) a1
+                                          JOIN (SELECT r.capacity, CO.offering_id
+                                              FROM ref_room r, course_offerings CO
+                                              WHERE r.room_id = CO.room_id
+                                              AND CO.course_id = '$course_id') a2
+                                          ON a1.offering_id = a2.offering_id) a3
+                                ON CO.offering_id = a3.offering_id
+                                WHERE CO.course_id = '$course_id'";
 
         if(!$courseOfferings = mysqli_query($con, $select_query)) {
             echo "Failed to retrieve course offerings";
