@@ -35,7 +35,7 @@
 
     <title>
         <?php startblock('title') ?>
-        <?php endblock() ?> - Course Registration
+        <?php endblock() ?> - Course Registration Portal
     </title>
 </head>
 
