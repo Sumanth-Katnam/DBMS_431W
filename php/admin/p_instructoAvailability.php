@@ -3,7 +3,7 @@
 
     $column = array("instructor_id", "instructor_name", "occurrence", "start_time", "end_time");
 
-    $query = "SELECT * FROM report3 ";
+    $query = "SELECT * FROM Report3 ";
 
     if(isset($_POST["search"]["value"])) {
         $query .= '
@@ -47,7 +47,7 @@
 
     function count_all_data($con) {
         global $con;
-        $countQuery = "SELECT COUNT(*) FROM Report1";
+        $countQuery = "SELECT COUNT(*) FROM Report3";
         $result = mysqli_query($con, $countQuery);
         $count = mysqli_fetch_assoc($result);
         return $count['COUNT(*)'];

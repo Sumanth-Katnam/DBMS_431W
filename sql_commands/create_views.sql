@@ -38,6 +38,7 @@ AND A.schedule_id = B.schedule_id
 WHERE B.schedule_id is null;
 
 --Instructor Availability
+drop view Report3
 CREATE VIEW Report3 AS
 SELECT A.instructor_id, concat(A.fname," ",A.mname," ",A.lname) as instructor_name, A.occurrence, A.start_time, A.end_time
 FROM (SELECT *
