@@ -173,12 +173,12 @@ const displayMessage = (status) => {
       messageType: 'Success',
       messageText: 'The course has been successfully added to cart.',
     },
-    duplicateCart: {
+    duplicatecart: {
       alertClass: 'alert-warning',
       messageType: 'Info',
       messageText: 'The selected course already exists in your cart.',
     },
-    duplicateTaken: {
+    duplicatetaken: {
       alertClass: 'alert-warning',
       messageType: 'Info',
       messageText: 'You have arleady enrolled for the selected course.',
