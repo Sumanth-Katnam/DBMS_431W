@@ -1,3 +1,4 @@
+--- number of students per course
 CREATE VIEW Report1 AS
 SELECT D.dept_id, D.dept_name, C.course_id, C.course_name, I.instructor_id, concat(I.fname," ",I.mname," ",I.lname) as instructor_name, count(*) as total
 FROM courses_taken A, ref_courses C, ref_department D,ref_instructors I, course_offerings O
@@ -60,3 +61,9 @@ AND B.course_id = C.course_id
 AND B.instructor_id = I.instructor_id
 AND B.schedule_id = S.schedule_id
 AND B.course_id = D.course_id;
+
+
+multiple input and delete  functionalities into cart and mycourses table
+update on myaccount information
+4 reports for admin
+the reports are atleast 5 join
