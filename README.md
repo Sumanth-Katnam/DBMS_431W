@@ -20,6 +20,10 @@ A student logs into the portal and will be redirected to a home page. On each pa
 
 An Admin or a professor can login using the admin login on the portal. They will be redirected to a home page and from there they can navigate to any of the reports on the navigation bar on the top of each page in the application. Each of these reports contain insightful data from the current system and help the users in assessing the current requirements of students, professor’s availability etc.,
 
+## Application URL
+http://e5-cse-cs431fa21s1-3.vmhost.psu.edu/DBMS_431W/login/login.php - for student login
+http://e5-cse-cs431fa21s1-3.vmhost.psu.edu/DBMS_431W/login/admin_login.php - for admin login
+
 ## Directory structure and details
 
 ### admin
@@ -74,7 +78,7 @@ course_offerings.csv
 
 ### login
 
-This folder has the files for both student and admin login and their configuration
+This folder has the files for both student and admin login php files
 
 ### models
 
